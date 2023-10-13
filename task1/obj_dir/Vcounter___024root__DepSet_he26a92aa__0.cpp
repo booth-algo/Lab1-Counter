@@ -12,15 +12,8 @@ VL_INLINE_OPT void Vcounter___024root___sequent__TOP__0(Vcounter___024root* vlSe
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vcounter___024root___sequent__TOP__0\n"); );
     // Body
     vlSelf->count = ((IData)(vlSelf->rst) ? 0U : (0xffU 
-                                                  & ((IData)(vlSelf->en)
-                                                      ? 
-                                                     ((IData)(vlSelf->count) 
-                                                      + (IData)(vlSelf->en))
-                                                      : 
-                                                     ((IData)(vlSelf->count) 
-                                                      - 
-                                                      (1U 
-                                                       & (~ (IData)(vlSelf->en)))))));
+                                                  & ((IData)(vlSelf->count) 
+                                                     + (IData)(vlSelf->en))));
 }
 
 void Vcounter___024root___eval(Vcounter___024root* vlSelf) {

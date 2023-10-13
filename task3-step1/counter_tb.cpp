@@ -19,11 +19,13 @@ int main(int argc, char **argv, char **env) {
     // init Vbuddy
     if (vbdOpen() != 1) return(-1);
     vbdHeader("Lab 1: Counter");
+    vbdSetMode(1);
 
     // initialize simulation inputs (top = top-level entity, only top-level signals are visible)
     top->clk = 1;
     top->rst = 1;
-    top->en = 0;
+    top->ld = 0;
+    top->v = vbdValue();
 
     // run simulation for many clock cycles
     for (i=0; i<1000; i++){
@@ -44,9 +46,10 @@ int main(int argc, char **argv, char **env) {
         // vbdPlot(int(top->count), 0, 255);
         // ---- end of Vbuddy output section
 
-        top->rst = (i<2) | (i == 20);
+        top->rst = (i<2);
         // top->en = (i>4) && (i<=13 | i>=17);
-        top->en = vbdFlag();
+        top->ld = vbdFlag();
+        top->v = vbdValue();
 
         if (Verilated::gotFinish()) exit(0);
     }
