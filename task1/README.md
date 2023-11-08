@@ -19,7 +19,7 @@ Having completed Lab0, I have the following installed:
 
 A counter module was created in `counter.sv`
 
-![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/f6d8cb05-9801-4366-b2a4-909a4472f6e6)
+![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/3ce4c567-5c8d-4ec1-9427-ce00442d3f9a)
 
 The System Verilog code synthesizes:
 
@@ -37,7 +37,7 @@ And specifically for line 14, the line starting with the `else` statement: `coun
 
 **Creating a testbench**
 
-![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/2f4576e7-0812-4852-962a-5a49c8ba30a9)
+![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/26fb9fc2-a021-4ff1-a7f9-023a10d1d180)
 
 The part below traces through 99 levels of hierarchy:
 
@@ -51,7 +51,7 @@ In the testbench, I set my initial inputs:
 
 The waveform is shown below here:
 
-![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/a4411a8c-13ad-415b-80f3-9a4d69faee21)
+![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/b0998a5b-baca-4342-86fb-842d0934d8e5)
 
 We see that, assuming clock is -1 before the first cycle, 
 - rst is HIGH until the 2nd clock cycle
@@ -66,19 +66,25 @@ We can see that the eval() function comes after the clk line. This means all the
 
 ## Test Yourself Challenge
 
-To stop counting for 3 cycles oncej the counter reaches 0x09, and then to resume counting, I modified the testbench stimulus:
-- en is LOW between cycles 14-15
+![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/2f4576e7-0812-4852-962a-5a49c8ba30a9)
+
+To stop counting for 3 cycles once the counter reaches `0x09`, and then to resume counting, I modified the testbench so that `en` is LOW between cycles 14-16
+
+![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/d0d381ca-1d7b-401e-9576-12e0da76661d)
 
 To implement an asynchronous reset, I changed the sensitivity list of the always_ff block to:
-- posedge clk or posedge rst
+
+![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/1e785368-4a6e-4d20-8fb5-de35839c771e)
 
 To test this, the testbench stimulus for the rst block is changed to:
-- rst is also HIGH during cycle 21.
+- rst is also HIGH during cycle 20
+
+![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/f4802292-9fbc-42b1-b373-4f53a5e1c72c)
 
 This resulted in the following waveform:
 
-IMAGE HERE
+![image](https://github.com/booth-algo/Lab1-Counter/assets/107279223/587e9bae-a336-49b7-9cc5-8bf8cca282b2)
 
 The stimulus correctly caused the count to stop at 0x09 for three cycles.
 
-The reset occurs at cycle 21, and the count sets to zero mid-cycle due to Verilator twice per cycle evaluation, indicating the asynchronous reset has worked.
+The reset occurs at cycle 20, and the count sets to zero mid-cycle due to Verilator twice per cycle evaluation --> the asynchronous reset has worked.
